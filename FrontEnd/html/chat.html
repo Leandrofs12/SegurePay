@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="../css/chat.css">
+
+</head>
+<body>
+     <div class="sidebar">
+    <h3>FERRAMENTAS DO CHAT</h3>
+    <ul>
+      <li class="active">Modelos & Bots</li>
+      <li><a href="./relatorio.html">Relatórios</a></li>
+      <li><a href="./menu.html">Home</a></li>
+    </ul>
+  </div>
+
+
+  <div class="main-content">
+    <div class="card">
+      <h2>Modelos de bate-papo</h2>
+      <p>Converse com os clientes mais rapidamente usando modelos de resposta personalizados.</p>
+      <table id="chatModelsTable">
+        <thead>
+          <tr>
+            <th>Nome exibido na conversa</th>
+            <th>Horário de atendimento</th>
+            <th>Tipo de Serviço</th>
+            <th>Faz entrega?</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="add-button" onclick="showChatInputs()">+ Adicionar</div>
+      <div id="chatInputs" class="input-row" style="display:none;">
+        <input type="text" id="chatName" placeholder="Nome exibido">
+        <input type="text" id="chatTime" placeholder="Horário">
+        <input type="text" id="chatType" placeholder="Tipo de serviço">
+        <input type="text" id="chatDelivery" placeholder="Faz entrega?">
+        <button onclick="addChatRow()">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Produtos</h2>
+      <p>Você pode cadastrar novos produtos para vender</p>
+      <table id="productsTable">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Quantidade em estoque</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="add-button" onclick="showProductInputs()">+ Adicionar</div>
+      <div id="productInputs" class="input-row" style="display:none;">
+        <input type="text" id="productName" placeholder="Nome">
+        <input type="text" id="productPrice" placeholder="Preço">
+        <input type="text" id="productCategory" placeholder="Categoria">
+        <input type="text" id="productQuantity" placeholder="Quantidade">
+        <button onclick="addProductRow()">Adicionar</button>
+      </div>
+    </div>
+    <div class="import-buttons">
+        <button class="import-btn whatsapp">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        Importar para WhatsApp
+        </button>
+        <button class="import-btn instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+        Importar para Instagram
+        </button>
+    </div>
+  </div>
+  <script src="../js/chat.js"></script>
+</body>
+</html>
