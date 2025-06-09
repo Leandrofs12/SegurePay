@@ -102,7 +102,7 @@ nav.side-menu{
     height: 100%;
     background-color: #202020;
     padding: 40px 0 40px 1%;
-    box-shadow: 3px 0 0 #ba8aec;
+    box-shadow: 3px 0 0 #0d235f;
     position: fixed;
     top: 0;
     left: 0;
@@ -135,11 +135,11 @@ ul li.menu-item {
 }
 
 ul li.active{
-    background-color: #ba8aec;
+    background-color: #0d235f;
 }
 
 ul li.menu-item:hover{
-    background: #ba8aec;
+    background: #0d235f;
 }
 
 ul li.menu-item a{
