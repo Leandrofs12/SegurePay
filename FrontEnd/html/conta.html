@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta</title>
-   <!-- <link rel="stylesheet" href="../css/menu.css"> Reutiliza o menu -->
-    <link rel="stylesheet" href="../css/conta.css"> <!-- Novo CSS para esta página -->
+    <link rel="stylesheet" href="../css/conta.css"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
@@ -46,12 +45,9 @@
 <!-- CONTEÚDO PRINCIPAL -->
 <main class="main-content">
 
-  <!-- Seção dos dois cartões lado a lado -->
   <div class="top-cards">
 
-    <!-- Retângulo à esquerda -->
     <div class="card-rectangle">
-      <!-- Ícone de edição -->
       <div class="edit-icon" id="editBtn">
         <i class="bi bi-pencil-square"></i>
       </div>
@@ -71,24 +67,39 @@
       </div>
     </div>
 
-    <!-- Quadrado à direita (Calendário) -->
-    <div class="card-square">
-      <div class="calendar-header">
-        <select id="mesSelect"></select>
-        <select id="anoSelect"></select>
-        <a href="calendario.html" class="edit-calendar" title="Ver calendário">
-          <i class="bi bi-pencil"></i>
-        </a>
-      </div>
-
-      <div class="weekdays">
-        <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sab</div>
-      </div>
-
-      <div class="calendar-grid" id="calendarGrid"></div>
+    <!-- Calendário -->
+  <div class="card-square">
+    <div class="calendar-header">
+      <select id="mesSelect"></select>
+      <select id="anoSelect"></select>
+      <a href="#" class="edit-calendar" id="openEventModal" title="Agendar evento">
+        <i class="bi bi-pencil"></i>
+      </a>
     </div>
 
-  </div> 
+    <div class="weekdays">
+      <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sab</div>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>Agendar Evento</h2>
+      <form id="eventForm">
+        <label for="eventDate">Data:</label>
+        <input type="date" id="eventDate" required>
+
+        <label for="eventTitle">Título:</label>
+        <input type="text" id="eventTitle" required>
+
+        <button type="submit">Salvar Evento</button>
+      </form>
+    </div>
+  </div>  
+</div>
 
   <!-- Kanban abaixo dos cartões -->
   <section class="kanban-board">
