@@ -1,5 +1,22 @@
 let btn = document.querySelector('.fa-eye')
 
+document.addEventListener("keydown", (e)=>{
+    const focus = document.activeElement;
+    
+    if(focus !== document.querySelector("#usuario")
+        && focus !== document.querySelector("#senha")){
+        return;
+    }
+    
+    const k = e.key;
+    
+    if(k === "Enter"){
+        e.preventDefault();
+        document.querySelector("button").click();
+        return;
+    }
+})
+
 btn.addEventListener('click', ()=>{
   let inputSenha = document.querySelector('#senha')
   
