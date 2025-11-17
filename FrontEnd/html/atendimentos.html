@@ -1,0 +1,57 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atendimentos — SegurePay</title>
+  <link rel="stylesheet" href="../css/atendimento.css" />
+</head>
+<body>
+  <div class="layout">
+    <div class="sidebar" aria-hidden="false">
+      <h3>FERRAMENTAS DO CHAT</h3>
+      <ul>
+        <li><a href="./chat.html">Modelos & Bots</a></li>
+        <li class="active">Atendimentos</li>
+        <li><a href="./relatorio.html">Relatórios</a></li>
+        <li><a href="./menu.html">Home</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="chat-app" role="application" aria-label="Atendimento por chat">
+        <!-- container com coluna de contatos + visual do chat -->
+        <div class="chat-wrapper">
+          <aside class="contacts-list" id="contactsList" aria-label="Lista de contatos">
+            <!-- contatos serão renderizados pelo JS -->
+          </aside>
+
+          <section class="chat-view" aria-live="polite">
+            <div class="chat-header">
+              <div class="chat-contact">
+                <img id="contactAvatar" src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Atendimento" class="avatar">
+                <div>
+                  <div id="contactName" class="contact-name">Selecione um contato</div>
+                  <div id="contactStatus" class="contact-status">Offline</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="messagesContainer" class="messages" aria-live="polite"></div>
+
+            <div class="chat-input">
+              <button id="attachBtn" class="icon-btn" title="Anexar">📎</button>
+              <textarea id="messageInput" placeholder="Escreva uma mensagem..." rows="1" aria-label="Mensagem"></textarea>
+              <button id="sendBtn" class="send-btn">Enviar</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/atendimento.js"></script>
+</body>
+</html>
+<!-- ...existing code... -->

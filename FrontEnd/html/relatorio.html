@@ -1,57 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatBot</title>
-    <link rel="stylesheet" href="../css/relatorio.css">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Relatórios — SegurePay</title>
+  <link rel="stylesheet" href="../css/relatorio.css" />
 </head>
 <body>
-<div class="sidebar">
-    <h3>FERRAMENTAS DO CHAT</h3>
-    <ul>
-      <li><a href="./chat.html">Modelos & Bots</a></li>
-      <li class="active"><a href="./relatorio.html">Relatórios</a></li>
-      <li><a href="./menu.html">Home</a></li>
-    </ul>
-</div>
-
-<div class="dashboard">
-  <div class="card large">
-    <h3>MENSAGENS RECEBIDAS</h3>
-    <div class="metric">
-      <span class="valuegreenlarge">0</span>
-      <span class="labelgreen">esta semana</span>
-  </div>
-    <div class="source-line">
-      <span class="dot"></span>
-      <span>Bate-papo online</span>
-      <span class="value green right">0</span>
+  <div class="layout">
+    <div class="sidebar">
+      <h3>FERRAMENTAS DO CHAT</h3>
+      <ul>
+        <li><a href="./chat.html">Modelos & Bots</a></li>
+        <li><a href="./atendimentos.html">Atendimentos</a></li>
+        <li class="active">Relatórios</li>
+        <li><a href="./menu.html">Home</a></li>
+      </ul>
     </div>
+
+    <main class="main-content">
+      <h2>Dashboards — Conversas</h2>
+
+      <div class="dashboard">
+        <div class="card chart-card">
+          <h3>Mensagens por contato</h3>
+          <canvas id="chartMessagesPerContact" height="160"></canvas>
+        </div>
+
+        <div class="card chart-card">
+          <h3>Mensagens por dia (últimos 30 dias)</h3>
+          <canvas id="chartMessagesByDay" height="160"></canvas>
+        </div>
+
+        <div class="card chart-card">
+          <h3>Tempo médio de resposta (min) por contato</h3>
+          <canvas id="chartAvgResponse" height="160"></canvas>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button id="refreshCharts" class="import-btn">Atualizar gráficos</button>
+        <button id="resetReports" class="import-btn" style="margin-left:8px">Resetar dados das métricas</button>
+      </div>
+    </main>
   </div>
 
-  <div class="card small">
-    <h3>CONVERSAS ATUAIS</h3>
-    <div class="metric">
-      <span class="value purple">0</span>
-      <span class="label">esta semana</span>
-    </div>
-  </div>
-
-  
-  <div class="card small">
-    <h3>CHATS SEM RESPOSTAS</h3>
-    <div class="metric">
-      <span class="value purple">0</span>
-      <span class="label">esta semana</span>
-    </div>
-  </div>
-
-
-
-</div>
-  
-  <script src="../js/chat.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/relatorio.js"></script>
 </body>
 </html>
