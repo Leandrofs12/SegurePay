@@ -1,21 +1,30 @@
+/* ============================
+   IMPORTS & RESET
+============================ */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
 
-body{
+/* ============================
+   BODY
+============================ */
+body {
     height: 100vh;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1280' height='720' preserveAspectRatio='none' viewBox='0 0 1280 720'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1184%26quot%3b)' fill='none'%3e%3crect width='1280' height='720' x='0' y='0' fill='url(%23SvgjsLinearGradient1185)'%3e%3c/rect%3e%3cpath d='M 0%2c136 C 85.4%2c167.6 256.2%2c311.2 427%2c294 C 597.8%2c276.8 683.4%2c43.6 854%2c50 C 1024.6%2c56.4 1194.8%2c270.8 1280%2c326L1280 720L0 720z' fill='%23184a7e'%3e%3c/path%3e%3cpath d='M 0%2c579 C 128%2c548 384%2c410.4 640%2c424 C 896%2c437.6 1152%2c602.4 1280%2c647L1280 720L0 720z' fill='%232264ab'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1184'%3e%3crect width='1280' height='720' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='10.94%25' y1='-19.44%25' x2='89.06%25' y2='119.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1185'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='%2300459e' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'...");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-nav.side-menu{
+/* ============================
+   SIDE MENU
+============================ */
+nav.side-menu {
     width: 80px;
     height: 100%;
     background-color: #202020;
@@ -26,11 +35,10 @@ nav.side-menu{
     left: 0;
     overflow: hidden;
     transition: 0.2s;
-
     z-index: 10;
 }
 
-nav.side-menu.expand{
+nav.side-menu.expand {
     width: 300px;
 }
 
@@ -39,54 +47,57 @@ nav.side-menu.expand{
     padding-left: 10px;
 }
 
-.btn-expand > i{
+.btn-expand > i {
     color: #fff;
     font-size: 24px;
     cursor: pointer;
 }
 
-ul{
+/* Menu items */
+ul {
     height: 100%;
-    list-style-type: none;
+    list-style: none;
 }
 
 ul li.menu-item {
     transition: .2s;
 }
 
-ul li.active{
+ul li.active,
+ul li.menu-item:hover {
     background-color: #0d235f;
 }
 
-ul li.menu-item:hover{
-    background: #0d235f;
+ul li.menu-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 40px;
 }
 
-ul li.menu-item a{
-   color: #fff; 
-   text-decoration: none;
-   font-size: 20px;
-   padding: 20px 4%;
-   display: flex;
-   margin-bottom: 20px;
-   line-height: 40px;
-}
-
-ul li.menu-item a .txt-link{
+.txt-link {
     margin-left: 30px;
 }
 
-ul li.menu-item a .icon > i{
+.icon > i {
     font-size: 30px;
     margin-left: 10px;
 }
 
-
+/* ============================
+   MAIN CONTENT
+============================ */
 .main-content {
-    margin-left: 250px; /* espaço para o menu lateral */
+    margin-left: 250px;
     padding: 2rem;
 }
 
+/* ============================
+   FORM
+============================ */
 .form-conta {
     display: flex;
     flex-direction: column;
@@ -117,46 +128,129 @@ ul li.menu-item a .icon > i{
     background-color: #0056b3;
 }
 
+/* ============================
+   TOP CARDS
+============================ */
 .top-cards {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
 }
+/* Retângulo principal */
+.card-rectangle,
+.card-square,
+.kanban-board {
+    background-color: #4E6A89;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
 .card-rectangle {
     width: 60%;
     height: 400px;
-    background-color: #E9F4FE;
     position: relative;
     font-size: 1.5rem;
-    border-radius: 10px;
     padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-left: -50px;
+
+    /* nova organização interna */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
+/* ============================
+   INFORMAÇÕES DA EMPRESA
+============================ */
+
+.company-info {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* LOGO */
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 260px;
+}
+
+.logo-container {
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#logoInput {
+    display: none;
+}
+
+.change-logo {
+    color: white;
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.change-logo:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* CAMPOS */
+.company-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+    color: white;
+}
+
+.field-line {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.field-line label {
+    font-weight: bold;
+}
+
+.field-line .field {
+    font-weight: 300;
+}
+
+
+/* Quadrado com calendário */
 .card-square {
     width: 500px;
     height: 400px;
-    background-color: #E9F4FE;
-    border-radius: 10px;
+    margin: 2px 30px 0 30px;
+    padding: 1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-right:  30px;
-
     z-index: 1;
-}
-
-.card-square {
-  padding: 1rem;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  
-  margin-left: 30px;
-  margin-top: 2px;  
 }
 
 .card-icon {
@@ -169,9 +263,9 @@ ul li.menu-item a .icon > i{
     bottom: 20px;
     right: 10px;
     width: 150px;
-    height: auto;
 }
 
+/* Ícone de edição */
 .edit-icon {
     position: absolute;
     top: 10px;
@@ -181,276 +275,197 @@ ul li.menu-item a .icon > i{
     color: #666;
     transition: color 0.2s;
 }
+
 .edit-icon:hover {
     color: #000;
 }
 
-  .calendar-header {
+/* ============================
+   CALENDÁRIO
+============================ */
+.calendar-header {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
     align-items: flex-start;
-  }
+}
 
-  .weekdays {
+.weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 100%;
     font-weight: bold;
     text-align: center;
     margin-bottom: 0.5rem;
-  }
+}
 
-  .calendar-grid {
+.calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-    width: 100%;
-  }
+}
 
-  .calendar-grid .day {
+.day {
     padding: 10px;
     border-radius: 50%;
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
-  }
+}
 
-  .calendar-grid .day:hover {
+.day:hover {
     background-color: #50A7E5;
     color: #fff;
-  }
+}
 
-  .kanban-board {
-  background-color: #E9F4FE;
-  margin-top: 2rem;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 100%;
+.day.event-day {
+    background-color: #28a745;
+    color: #fff;
+}
 
-  margin-left: -50px;
+/* ============================
+   KANBAN
+============================ */
+.kanban-board {
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    margin-left: -50px;
 }
 
 .kanban-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
 }
 
 #addColumnBtn {
-  background-color: #50A7E5;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #50A7E5;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #addColumnBtn:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
+    background-color: #aaa;
+    cursor: not-allowed;
 }
 
+/* Colunas */
 .kanban-columns {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem 0;
 }
 
 .kanban-column {
-  background-color: white;
-  border-radius: 8px;
-  padding: 1rem;
-  min-width: 200px;
-  max-width: 250px;
-  flex: 1;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-.kanban-columns {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  overflow-x: auto;
-}
-
-.kanban-column {
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  min-width: 220px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    min-width: 220px;
+    max-width: 250px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .column-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .column-title {
-  border: none;
-  font-weight: bold;
-  width: 100%;
+    border: none;
+    font-weight: bold;
+    width: 100%;
 }
 
+/* Tarefas */
 .tasks {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.task {
-  background-color: #50A7E5;
-  padding: 0.75rem;
-  border-radius: 6px;
-  color: white;
-  cursor: text;
-  outline: none;
-}
-
-.add-task-btn {
-  background-color: #E9F4FE;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.kanban-board {
-  background-color: #E9F4FE;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-.kanban-columns {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-}
-
-.kanban-column {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-}
-
+.task,
 .kanban-task {
-  background-color: #50A7E5;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-}
-
-.task {
-  background-color: #50A7E5;
-  color: white;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  border-radius: 0.5rem;
-  cursor: grab;
+    background-color: #50A7E5;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
 }
 
 .task.dragging {
-  opacity: 0.5;
-}
-
-.task {
-  background-color: #50A7E5;
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
+    opacity: 0.5;
 }
 
 .task-content {
-  flex: 1;
-  margin-right: 8px;
-  outline: none;
+    flex: 1;
+    margin-right: 8px;
+    outline: none;
 }
 
 .delete-task {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
 }
 
+/* ============================
+   MODAL
+============================ */
 .modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
 .modal {
-  background: #fff;
-  padding: 2rem;
+    background: #fff;
+    padding: 2rem; 
+
+}
+
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  max-width: 450px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
   border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  position: relative;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0;
+  transition: opacity 0.5s, visibility 0.5s;
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
+#toast.show {
+  visibility: visible;
+  opacity: 1;
 }
-
-
-.day.event-day {
-  background-color: #28a745 !important; /* verde */
-  color: #fff;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  width: 100%;
-}
-
-.calendar-grid .day {
-  padding: 10px;
-  border-radius: 50%;
-  text-align: center;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.calendar-grid .day:hover {
-  background-color: #50A7E5;
-  color: #fff;
-}
-
-.calendar-grid .day.event-day {
-  background-color: #28a745; /* verde */
-  color: #fff;
-}
-
-
-
-
