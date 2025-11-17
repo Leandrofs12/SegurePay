@@ -1,101 +1,133 @@
-const editBtn = document.getElementById('editBtn');
+/* =========================================================
+   MENU LATERAL
+========================================================= */
+const menuItems = document.querySelectorAll(".menu-item");
+const btnExpand = document.querySelector("#btn-exp");
+const menuSide = document.querySelector(".side-menu");
+
+// Marca item selecionado
+menuItems.forEach(item => {
+  item.addEventListener("click", function () {
+    menuItems.forEach(i => i.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
+// Expandir/retrair menu
+btnExpand.addEventListener("click", () => {
+  menuSide.classList.toggle("expand");
+});
+
+
+/* =========================================================
+   CAMPOS EDITÁVEIS + LOCALSTORAGE
+========================================================= */
+const editBtn = document.getElementById("editBtn");
 let isEditing = false;
 
-
-var menuItem = document.querySelectorAll( '.menu-item')
-
-function selectLink(){
-    menuItem.forEach((item)=>
-        item.classList.remove('active')
-    )
-    this.classList.add('active')
-}
-
-menuItem.forEach((item)=>
-    item.addEventListener('click', selectLink)
-)
-var btnExp = document.querySelector('#btn-exp')
-var menuSide = document.querySelector('.side-menu')
-
-btnExp.addEventListener('click', function(){
-    menuSide.classList.toggle('expand')
-})
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-  const savedData = JSON.parse(localStorage.getItem('empresaData'));
+// Carregar dados salvos
+window.addEventListener("DOMContentLoaded", () => {
+  const savedData = JSON.parse(localStorage.getItem("empresaData"));
   if (savedData) {
-    Object.keys(savedData).forEach(key => {
+    Object.entries(savedData).forEach(([key, value]) => {
       const span = document.querySelector(`.field[data-key="${key}"]`);
-      if (span) span.textContent = savedData[key];
+      if (span) span.textContent = value;
     });
   }
 });
 
-editBtn.addEventListener('click', () => {
+// Modo edição
+editBtn.addEventListener("click", () => {
   if (!isEditing) {
-
-    document.querySelectorAll('.field').forEach(span => {
-      const value = span.textContent;
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.value = value;
-      input.placeholder = 'Digite aqui...';
-      input.setAttribute('data-key', span.dataset.key);
-      span.replaceWith(input);
-    });
-    editBtn.innerHTML = '<i class="bi bi-save"></i>';
+    ativarEdicao();
   } else {
-
-    const updatedData = {};
-    document.querySelectorAll('input[data-key]').forEach(input => {
-      const value = input.value;
-      const key = input.dataset.key;
-      updatedData[key] = value;
-
-      const span = document.createElement('span');
-      span.className = 'field';
-      span.dataset.key = key;
-      span.textContent = value;
-      input.replaceWith(span);
-    });
-
-    localStorage.setItem('empresaData', JSON.stringify(updatedData));
-
-    editBtn.innerHTML = '<i class="bi bi-pencil-square"></i>';
+    salvarEdicao();
   }
 
   isEditing = !isEditing;
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const logoImg = document.querySelector(".card-img");
-    const logoInput = document.getElementById("logoInput");
+function ativarEdicao() {
+  document.querySelectorAll(".field").forEach(span => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = span.textContent;
+    input.placeholder = "Digite aqui...";
+    input.dataset.key = span.dataset.key;
+    span.replaceWith(input);
+  });
 
-    const savedLogo = localStorage.getItem("empresaLogo");
-    if (savedLogo) {
-        logoImg.src = savedLogo;
-    }
+  editBtn.innerHTML = `<i class="bi bi-save"></i>`;
+}
 
-    logoInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const dataURL = e.target.result;
-                logoImg.src = dataURL;
-                localStorage.setItem("empresaLogo", dataURL);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+function salvarEdicao() {
+  const dadosAtualizados = {};
+
+  document.querySelectorAll('input[data-key]').forEach(input => {
+    const span = document.createElement("span");
+    span.className = "field";
+    span.dataset.key = input.dataset.key;
+    span.textContent = input.value;
+
+    dadosAtualizados[input.dataset.key] = input.value;
+    input.replaceWith(span);
+  });
+
+  localStorage.setItem("empresaData", JSON.stringify(dadosAtualizados));
+
+  editBtn.innerHTML = `<i class="bi bi-pencil-square"></i>`;
+}
+
+
+/* =========================================================
+   LOGO DINÂMICO (AJUSTADO PARA O NOVO HTML)
+========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const logoImg = document.getElementById("companyLogo");
+  const logoInput = document.getElementById("logoInput");
+  const changeLogoBtn = document.querySelector(".change-logo");
+
+  // Carregar do localStorage
+  const savedLogo = localStorage.getItem("empresaLogo");
+  if (savedLogo) logoImg.src = savedLogo;
+
+  // Ao clicar na área "Alterar logo"
+  changeLogoBtn.addEventListener("click", () => {
+    logoInput.click();
+  });
+
+  // Ao selecionar arquivo
+  logoInput.addEventListener("change", () => {
+    const file = logoInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      const dataURL = e.target.result;
+
+      logoImg.src = dataURL;
+      localStorage.setItem("empresaLogo", dataURL);
+    };
+
+    reader.readAsDataURL(file);
+  });
 });
 
+
+/* =========================================================
+   KANBAN
+========================================================= */
+const addColumnBtn = document.getElementById("addColumnBtn");
+const kanbanColumns = document.getElementById("kanbanColumns");
+
 addColumnBtn.addEventListener("click", () => {
+  const column = criarColuna();
+  kanbanColumns.appendChild(column);
+});
+
+function criarColuna() {
   const column = document.createElement("div");
   column.className = "kanban-column";
-
   column.innerHTML = `
     <div class="column-header">
       <input class="column-title" value="Nova Coluna" />
@@ -105,131 +137,89 @@ addColumnBtn.addEventListener("click", () => {
     <button class="add-task-btn">+ Adicionar Quadro</button>
   `;
 
-  column.querySelector(".delete-column").addEventListener("click", () => {
-    column.remove();
-  });
-
+  const deleteBtn = column.querySelector(".delete-column");
   const tasksContainer = column.querySelector(".tasks");
   const addTaskBtn = column.querySelector(".add-task-btn");
 
-  addTaskBtn.addEventListener("click", () => {
-    const currentTasks = tasksContainer.querySelectorAll(".task");
-    if (currentTasks.length >= 5) {
-      alert("Máximo de 5 quadros por coluna atingido.");
-      return;
-    }
+  deleteBtn.addEventListener("click", () => column.remove());
 
-    const task = document.createElement("div");
-  task.className = "task";
-  task.setAttribute("draggable", "true");
+  addTaskBtn.addEventListener("click", () => adicionarTask(tasksContainer));
 
-  
-  task.innerHTML = `
-  <div contenteditable="true" class="task-content">Novo Quadro</div>
-  <button class="delete-task" title="Excluir quadro">🗑️</button>
-`;
-
-  
-  task.querySelector(".delete-task").addEventListener("click", () => {
-  task.remove();
-  });
-
-
-task.addEventListener("dragstart", () => {
-  task.classList.add("dragging");
-});
-task.addEventListener("dragend", () => {
-  task.classList.remove("dragging");
-});
-
-tasksContainer.appendChild(task);
-
-
-    // Drag and Drop
-    task.setAttribute("draggable", "true");
-    task.addEventListener("dragstart", () => {
-      task.classList.add("dragging");
-    });
-    task.addEventListener("dragend", () => {
-      task.classList.remove("dragging");
-    });
-
-    tasksContainer.appendChild(task);
-  });
-
-  tasksContainer.addEventListener("dragover", (e) => {
+  tasksContainer.addEventListener("dragover", e => {
     e.preventDefault();
-    const draggingTask = document.querySelector(".dragging");
-    const currentTasks = tasksContainer.querySelectorAll(".task");
+    const dragging = document.querySelector(".dragging");
+    const totalTasks = tasksContainer.querySelectorAll(".task").length;
 
-    if (draggingTask && !tasksContainer.contains(draggingTask)) {
-      if (currentTasks.length < 3) {
-        tasksContainer.appendChild(draggingTask);
-      }
+    if (dragging && totalTasks < 5) {
+      tasksContainer.appendChild(dragging);
     }
   });
 
-  kanbanColumns.appendChild(column);
-});
+  return column;
+}
 
-const mesSelect = document.getElementById('mesSelect');
-const anoSelect = document.getElementById('anoSelect');
-const calendarGrid = document.getElementById('calendarGrid');
+function adicionarTask(container) {
+  if (container.querySelectorAll(".task").length >= 5) {
+    alert("Máximo de 5 quadros por coluna atingido.");
+    return;
+  }
+
+  const task = document.createElement("div");
+  task.className = "task";
+  task.draggable = true;
+
+  task.innerHTML = `
+    <div class="task-content" contenteditable="true">Novo Quadro</div>
+    <button class="delete-task" title="Excluir quadro">🗑️</button>
+  `;
+
+  task.querySelector(".delete-task").addEventListener("click", () => task.remove());
+
+  task.addEventListener("dragstart", () => task.classList.add("dragging"));
+  task.addEventListener("dragend", () => task.classList.remove("dragging"));
+
+  container.appendChild(task);
+}
+
+
+/* =========================================================
+   CALENDÁRIO + EVENTOS
+========================================================= */
+const mesSelect = document.getElementById("mesSelect");
+const anoSelect = document.getElementById("anoSelect");
+const calendarGrid = document.getElementById("calendarGrid");
 
 const meses = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril',
-  'Maio', 'Junho', 'Julho', 'Agosto',
-  'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  "Janeiro", "Fevereiro", "Março", "Abril",
+  "Maio", "Junho", "Julho", "Agosto",
+  "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
+let eventos = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarEventosLocal();
+  preencherSelects();
+  initCalendar();
+
+  mesSelect.addEventListener("change", atualizarCalendario);
+  anoSelect.addEventListener("change", atualizarCalendario);
+});
+
+
+// Preenche selects
 function preencherSelects() {
   meses.forEach((mes, i) => {
-    const option = document.createElement('option');
-    option.value = i + 1;
-    option.textContent = mes;
-    mesSelect.appendChild(option);
+    mesSelect.innerHTML += `<option value="${i + 1}">${mes}</option>`;
   });
 
   const anoAtual = new Date().getFullYear();
-  for(let ano = anoAtual - 10; ano <= anoAtual + 10; ano++) {
-    const option = document.createElement('option');
-    option.value = ano;
-    option.textContent = ano;
-    anoSelect.appendChild(option);
+  for (let ano = anoAtual - 10; ano <= anoAtual + 10; ano++) {
+    anoSelect.innerHTML += `<option value="${ano}">${ano}</option>`;
   }
-}
-
-function gerarDias(mes, ano) {
-  calendarGrid.innerHTML = '';
-
-  const primeiroDia = new Date(ano, mes - 1, 1).getDay();
-  const totalDias = new Date(ano, mes, 0).getDate();
-
-  for(let i = 0; i < primeiroDia; i++) {
-    const vazio = document.createElement('div');
-    calendarGrid.appendChild(vazio);
-  }
-
-  for(let dia = 1; dia <= totalDias; dia++) {
-    const diaDiv = document.createElement('div');
-    diaDiv.className = 'day';
-    diaDiv.textContent = dia;
-    diaDiv.dataset.day = dia; 
-
-    calendarGrid.appendChild(diaDiv);
-  }
-}
-
-function atualizarCalendario() {
-  const mes = parseInt(mesSelect.value);
-  const ano = parseInt(anoSelect.value);
-  gerarDias(mes, ano);
-  atualizarEventos();
 }
 
 function initCalendar() {
-  preencherSelects();
-
   const hoje = new Date();
   mesSelect.value = hoje.getMonth() + 1;
   anoSelect.value = hoje.getFullYear();
@@ -238,104 +228,116 @@ function initCalendar() {
   atualizarEventos();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  carregarEventosLocal();
-  initCalendar();
-
-  mesSelect.addEventListener('change', atualizarCalendario);
-  anoSelect.addEventListener('change', atualizarCalendario);
-});
-
-const modal = document.getElementById('eventModal');
-const openModalBtn = document.getElementById('openEventModal');
-const closeModalBtn = document.getElementById('closeModal');
-const eventForm = document.getElementById('eventForm');
-
-let eventos = {}; 
-
-openModalBtn.addEventListener('click', e => {
-  e.preventDefault();
-  modal.style.display = 'flex';
-});
-
-closeModalBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-window.addEventListener('click', e => {
-  if(e.target === modal) {
-    modal.style.display = 'none';
-  }
-});
-
-eventForm.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const date = document.getElementById('eventDate').value;
-  const title = document.getElementById('eventTitle').value;
-
-  if(!date || !title) return;
-
-  eventos[date] = title;
-
-  salvarEventosLocal();
-
-  modal.style.display = 'none';
-  eventForm.reset();
-
+function atualizarCalendario() {
+  gerarDias(parseInt(mesSelect.value), parseInt(anoSelect.value));
   atualizarEventos();
-});
+}
+
+function gerarDias(mes, ano) {
+  calendarGrid.innerHTML = "";
+
+  const primeiroDia = new Date(ano, mes - 1, 1).getDay();
+  const totalDias = new Date(ano, mes, 0).getDate();
+
+  for (let i = 0; i < primeiroDia; i++) {
+    calendarGrid.appendChild(document.createElement("div"));
+  }
+
+  for (let dia = 1; dia <= totalDias; dia++) {
+    const div = document.createElement("div");
+    div.className = "day";
+    div.textContent = dia;
+    div.dataset.day = dia;
+
+    calendarGrid.appendChild(div);
+  }
+}
 
 function atualizarEventos() {
-  const dias = document.querySelectorAll('.calendar-grid .day');
-  const mes = parseInt(mesSelect.value);
-  const ano = parseInt(anoSelect.value);
+  const dias = document.querySelectorAll(".day");
+  const mes = mesSelect.value;
+  const ano = anoSelect.value;
 
   dias.forEach(dia => {
-    const diaNum = parseInt(dia.dataset.day);
+    const data = `${ano}-${mes.padStart(2, "0")}-${String(dia.dataset.day).padStart(2, "0")}`;
 
-    const dataFormatada = `${ano}-${String(mes).padStart(2, '0')}-${String(diaNum).padStart(2, '0')}`;
+    dia.classList.remove("event-day");
+    dia.removeEventListener("click", exibirDescricaoEvento);
 
-    dia.classList.remove('event-day');
-    dia.removeEventListener('click', exibirDescricaoEvento);
-    if (eventos[dataFormatada]) {
-      dia.classList.add('event-day');
-      dia.title = eventos[dataFormatada];
-      dia.addEventListener('click', exibirDescricaoEvento);
-    } else {
-      dia.title = '';
+    if (eventos[data]) {
+      dia.classList.add("event-day");
+      dia.title = eventos[data];
+      dia.addEventListener("click", exibirDescricaoEvento);
     }
   });
 }
 
 function exibirDescricaoEvento(e) {
-  const dia = e.currentTarget;
-  const diaNum = dia.dataset.day;
+  const element = e.currentTarget;
   const mes = mesSelect.value;
   const ano = anoSelect.value;
+  const dia = element.dataset.day;
 
-  const data = `${ano}-${String(mes).padStart(2, '0')}-${String(diaNum).padStart(2, '0')}`;
-  const titulo = eventos[data];
-
-  if (titulo) {
-    alert(`📅 Evento em ${data}:\n\n${titulo}`);
-  }
+  const data = `${ano}-${mes.padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+  showToast(`📅 Evento em ${data}<br>${eventos[data]}`);
 }
 
 function salvarEventosLocal() {
-  localStorage.setItem('eventosCalendario', JSON.stringify(eventos));
+  localStorage.setItem("eventosCalendario", JSON.stringify(eventos));
 }
 
 function carregarEventosLocal() {
-  const dados = localStorage.getItem('eventosCalendario');
   try {
-    eventos = dados ? JSON.parse(dados) : {};
+    eventos = JSON.parse(localStorage.getItem("eventosCalendario")) || {};
   } catch {
     eventos = {};
   }
 }
 
+/* =========================================================
+   MODAL DE EVENTOS
+========================================================= */
+const modal = document.getElementById("eventModal");
+const openModalBtn = document.getElementById("openEventModal");
+const closeModalBtn = document.getElementById("closeModal");
+const eventForm = document.getElementById("eventForm");
 
+openModalBtn.addEventListener("click", e => {
+  e.preventDefault();
+  modal.style.display = "flex";
+});
 
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
 
+window.addEventListener("click", e => {
+  if (e.target === modal) modal.style.display = "none";
+});
 
+eventForm.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const date = document.getElementById("eventDate").value;
+  const title = document.getElementById("eventTitle").value;
+
+  if (!date || !title) return;
+
+  eventos[date] = title;
+  salvarEventosLocal();
+
+  modal.style.display = "none";
+  eventForm.reset();
+
+  atualizarEventos();
+});
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.innerHTML = message;
+  toast.className = "show";
+
+  setTimeout(() => {
+    toast.className = toast.className.replace("show", "");
+  }, 4000);
+}
