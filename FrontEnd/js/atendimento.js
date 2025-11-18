@@ -113,7 +113,7 @@
     autoResize();
     // resposta automática de exemplo
     setTimeout(()=> {
-      appendMessage('Recebemos sua mensagem. Em breve um atendente responderá.','received');
+      appendMessage('Olá, qual sua tabela de preços?','received');
     }, 700);
   }
 

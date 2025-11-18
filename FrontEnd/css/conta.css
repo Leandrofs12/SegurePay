@@ -24,74 +24,75 @@ body {
 /* ============================
    SIDE MENU
 ============================ */
+/* NAVBAR: estilo inspirado em chat.css (aplica visual do sidebar do chat) */
 nav.side-menu {
-    width: 80px;
-    height: 100%;
-    background-color: #202020;
-    padding: 40px 0 40px 1%;
-    box-shadow: 3px 0 0 #0d235f;
+    width: 260px;
+    height: 100vh;
+    background: #4E6A89;
+    border-right: 1px solid #823333;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     position: fixed;
     top: 0;
     left: 0;
-    overflow: hidden;
-    transition: 0.2s;
     z-index: 10;
 }
 
-nav.side-menu.expand {
-    width: 300px;
+nav.side-menu h3 {
+    margin: 0 0 6px 0;
+    font-size: 13px;
+    color: #ffffff;
 }
 
-.btn-expand {
-    width: 100%;
-    padding-left: 10px;
-}
-
-.btn-expand > i {
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Menu items */
-ul {
-    height: 100%;
+nav.side-menu ul {
     list-style: none;
-}
-
-ul li.menu-item {
-    transition: .2s;
-}
-
-ul li.active,
-ul li.menu-item:hover {
-    background-color: #0d235f;
-}
-
-ul li.menu-item a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 20px 4%;
+    padding: 0;
+    margin: 0;
     display: flex;
-    margin-bottom: 20px;
-    line-height: 40px;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
 }
 
-.txt-link {
-    margin-left: 30px;
+nav.side-menu ul li {
+    padding: 10px;
+    margin: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--accent, #ffffff);
+    background: transparent;
+    transition: background .18s, color .12s, transform .06s;
+    font-weight: 600;
+    font-size: 14px;
 }
 
-.icon > i {
-    font-size: 30px;
-    margin-left: 10px;
+nav.side-menu ul li a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+nav.side-menu ul li:hover {
+    background: #ffffff;
+    color: #000;
+}
+
+nav.side-menu ul li.active {
+    background-color: #e9f1ff;
+    color: #007bff;
+    font-weight: bold;
 }
 
 /* ============================
    MAIN CONTENT
 ============================ */
 .main-content {
-    margin-left: 250px;
+    margin-left: 260px;
     padding: 2rem;
 }
 

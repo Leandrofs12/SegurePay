@@ -1,5 +1,3 @@
-let btn = document.querySelector('.fa-eye')
-
 document.addEventListener("keydown", (e)=>{
     const focus = document.activeElement;
     
@@ -12,23 +10,13 @@ document.addEventListener("keydown", (e)=>{
     
     if(k === "Enter"){
         e.preventDefault();
-        document.querySelector("button").click();
+        entrar();
         return;
     }
 })
 
-btn.addEventListener('click', ()=>{
-  let inputSenha = document.querySelector('#senha')
-  
-  if(inputSenha.getAttribute('type') == 'password'){
-    inputSenha.setAttribute('type', 'text')
-  } else {
-    inputSenha.setAttribute('type', 'password')
-  }
-})
-
 function entrar(){
-  let email = document.querySelector('#email')
+  let usuario = document.querySelector('#usuario')
   let userLabel = document.querySelector('#userLabel')
   
   let senha = document.querySelector('#senha')
@@ -43,7 +31,13 @@ function entrar(){
     senha: ''
   }
   
-  listaUser = JSON.parse(localStorage.getItem('listaUser'))
+  listaUser = JSON.parse(localStorage.getItem('listaUser') || '[]')
+  
+  if(listaUser.length === 0){
+    msgError.setAttribute('style', 'display: block')
+    msgError.innerHTML = 'Nenhum usuário cadastrado. Por favor, cadastre-se primeiro.'
+    return
+  }
   
   listaUser.forEach((item) => {
     if(usuario.value == item.userCad && senha.value == item.senhaCad){
@@ -58,18 +52,17 @@ function entrar(){
   })
    
   if(usuario.value == userValid.user && senha.value == userValid.senha){
-    window.location.href = '../html/menu.html'
-    
     let mathRandom = Math.random().toString(16).substr(2)
     let token = mathRandom + mathRandom
-    
+
     localStorage.setItem('token', token)
     localStorage.setItem('userLogado', JSON.stringify(userValid))
+    window.location.href = './chat.html'
   } else {
-    userLabel.setAttribute('style', 'color: red')
-    usuario.setAttribute('style', 'border-color: red')
-    senhaLabel.setAttribute('style', 'color: red')
-    senha.setAttribute('style', 'border-color: red')
+    userLabel.setAttribute('style', 'color: #ff6b6b')
+    usuario.setAttribute('style', 'border-color: #ff6b6b')
+    senhaLabel.setAttribute('style', 'color: #ff6b6b')
+    senha.setAttribute('style', 'border-color: #ff6b6b')
     msgError.setAttribute('style', 'display: block')
     msgError.innerHTML = 'Usuário ou senha incorretos'
     usuario.focus()

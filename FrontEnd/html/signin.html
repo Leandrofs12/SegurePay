@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>SegurePay_login</title>
+    <title>SegurePay - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/signin.css">
 </head>
 <body>
-<div class="container">
-      <div class="card">
-        <h1>LOGIN</h1>
+    <nav>
+        <a class="logo" href="/">
+            <img src="../css/img/logo.png" alt="SegurePay Logo" class="logo-img">
+            SEGURE PAY
+        </a>
+        <ul class="nav-menu">
+            <li><a href="./index.html">Início</a></li>
+            <li><a href="./signup.html">Cadastrar</a></li>
+        </ul>
+    </nav>
 
-        <div id="msgError"></div>
+    <main>
+        <div class="form-container">
+            <div class="form-card">
+                <h1 class="form-title">LOGIN</h1>
 
-        <div class="label-float">
-          <input type="email" id="usuario" paceholder="" required />
-          <label id="userLabel" for="usuario">E-mail</label>
+                <div id="msgError" class="msg-error"></div>
+
+                <div class="label-float">
+                    <input type="email" id="usuario" placeholder=" " required />
+                    <label id="userLabel" for="usuario">E-mail</label>
+                </div>
+
+                <div class="label-float">
+                    <input type="password" id="senha" placeholder=" " required />
+                    <label id="senhaLabel" for="senha">Senha</label>
+                </div>
+
+                <button class="form-button" onclick="entrar()">Entrar</button>
+
+                <div class="form-divider"></div>
+
+                <p class="form-footer">
+                    Não tem uma conta?
+                    <a href="./signup.html">Cadastre-se</a>
+                </p>
+            </div>
         </div>
+    </main>
 
-        <div class="label-float">
-          <input type="password" id="senha" paceholder="" required />
-          <label id="senhaLabel" for="senha">Senha</label>
-        </div>
-
-        <div class="justify-center">
-          <button onclick="entrar()">Entrar</button>
-        </div>
-
-        <div class="justify-center">
-          <hr />
-        </div>
-
-        <p>
-          Não tem uma conta?
-          <a href="./signup.html">
-            Cadastre-se
-          </a>
-        </p>
-      </div>
-    </div>
 
     <script src="../js/signin.js"></script>
-  </body>
+</body>
 </html> 
 

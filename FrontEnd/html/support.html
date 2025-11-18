@@ -5,46 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Teste Sidebar - Anti + Spotify</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../css/Suport.css" />
-
+  <link rel="stylesheet" href="../css/support.css" />
 </head>
 <body>
-  <nav class="side-menu" id="sideMenu">
-    <div class="btn-expand">
-      <i class="bi bi-list" id="btnExp"></i>
-    </div>
-
-    <ul>
-      <li class="menu-item active">
-        <a href="./menu.html">
-          <span class="icon"><i class="bi bi-house-door"></i></span>
-          <span class="txt-link">Home</span>
+  <nav>
+        <a class="logo" href="/">
+            <img src="../css/img/logo.png" alt="SegurePay Logo" class="logo-img">
+            SEGURE PAY
         </a>
-      </li>
-
-      <li class="menu-item">
-        <a href="./produtos.html">
-          <span class="icon"><i class="bi bi-columns-gap"></i></span>
-          <span class="txt-link">Produtos</span>
-        </a>
-      </li>
-
-      <li class="menu-item">
-        <a href="./conta.html">
-          <span class="icon"><i class="bi bi-person-circle"></i></span>
-          <span class="txt-link">Conta</span>
-        </a>
-      </li>
-
-      <li class="menu-item">
-        <a href="./config.html">
-          <span class="icon"><i class="bi bi-gear"></i></span>
-          <span class="txt-link">Configurações</span>
-        </a>
-      </li>
-    </ul>
+        <ul class="nav-menu">
+            <li><a href="./index.html">Início</a></li>
+            <li><a href="./support.html">Suporte</a></li>
+            <li><a href="./signin.html">Login</a></li>
+        </ul>
   </nav>
-
+  
   <div class="container">
     <h2>Atendimento do SecurePay</h2>
     <h1>Como podemos ajudar?</h1>
@@ -71,7 +46,7 @@
           <div class="arrow">⌄</div>
         </div>
         <div class="item-content">
-            <a href="./config.html">
+            <a href="./support.html">
                 <p>Como alterar e configurar sua conta.</p>
             </a>
         </div>
@@ -83,7 +58,7 @@
           <div class="arrow">⌄</div>
         </div>
         <div class="item-content">
-            <a href="./config.html">
+            <a href="./support.html">
                 <p>Detalhes dos planos Premium disponíveis.</p>
             </a>
         </div>
@@ -95,8 +70,8 @@
           <div class="arrow">⌄</div>
         </div>
         <div class="item-content">
-            <a href="./config.html">
-                <p>Funcionalidades e dicas do app Spotify.</p>
+            <a href="./support.html">
+                <p>Funcionalidades e dicas do app.</p>
             </a>
         </div>
       </div>
@@ -104,16 +79,6 @@
   </div>
 
 <script>
-  // Toggle sidebar
-  (function(){
-    const btn = document.getElementById('btnExp');
-    const nav = document.getElementById('sideMenu');
-    btn.addEventListener('click', ()=> {
-      nav.classList.toggle('expand');
-      document.body.classList.toggle('sidebar-expanded');
-    });
-  })();
-
   // Accordion
   (function(){
     document.querySelectorAll('.accordion .item-header').forEach(header=>{
