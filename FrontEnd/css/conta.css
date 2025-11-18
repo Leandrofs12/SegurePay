@@ -22,9 +22,8 @@ body {
 }
 
 /* ============================
-   SIDE MENU
+   SIDE MENU (padronizado)
 ============================ */
-/* NAVBAR: estilo inspirado em chat.css (aplica visual do sidebar do chat) */
 nav.side-menu {
     width: 260px;
     height: 100vh;
@@ -54,7 +53,6 @@ nav.side-menu ul {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    height: 100%;
 }
 
 nav.side-menu ul li {
@@ -62,11 +60,11 @@ nav.side-menu ul li {
     margin: 0;
     border-radius: 8px;
     cursor: pointer;
-    color: var(--accent, #ffffff);
     background: transparent;
     transition: background .18s, color .12s, transform .06s;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 14px; /* IGUAL AO CHAT */
+    color: var(--accent, #ffffff); /* sem fallback para ficar igual */
 }
 
 nav.side-menu ul li a {
@@ -78,7 +76,7 @@ nav.side-menu ul li a {
 }
 
 nav.side-menu ul li:hover {
-    background: #ffffff;
+    background: var(--accent);
     color: #000;
 }
 
@@ -94,6 +92,7 @@ nav.side-menu ul li.active {
 .main-content {
     margin-left: 260px;
     padding: 2rem;
+    padding-left: 4.5rem;
 }
 
 /* ============================

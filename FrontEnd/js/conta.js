@@ -13,11 +13,6 @@ menuItems.forEach(item => {
   });
 });
 
-// Expandir/retrair menu
-btnExpand.addEventListener("click", () => {
-  menuSide.classList.toggle("expand");
-});
-
 
 /* =========================================================
    CAMPOS EDITÁVEIS + LOCALSTORAGE
